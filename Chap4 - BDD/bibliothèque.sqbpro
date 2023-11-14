@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/home/marzikill/bibliothèque.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1451"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,5:mainLivre"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Emprunt" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="109"/><column index="2" value="104"/><column index="3" value="89"/><column index="4" value="59"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Livre" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="3" mode="0"/></sort><column_widths><column index="1" value="49"/><column index="2" value="155"/><column index="3" value="137"/><column index="4" value="91"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Usager" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="49"/><column index="2" value="66"/><column index="3" value="63"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">-- Création de la table Livre
+CREATE TABLE Livre (
+    id INT PRIMARY KEY,
+    titre TEXT,
+    auteur TEXT,
+    annee_publi INT
+);
+</sql><sql name="SQL 2">INSERT INTO Livre 
+VALUES (1, 'Fondation', 'Isaac Asimov', 1951),
+    (2, '1984', 'George Orwell', 1949);
+</sql><sql name="SQL 3">INSERT INTO Livre 
+VALUES
+    (3, 'Le Seigneur des Anneaux', 'J.R.R. Tolkien', 1954),
+    (4, 'Guerre et Paix', 'Léon Tolstoï', 1869),
+    (5, 'Orgueil et Préjugés', 'Jane Austen', 1813),
+    (6, 'L''Étranger', 'Albert Camus', 1942),
+    (7, 'Le Petit Prince', 'Antoine de Saint-Exupéry', 1943),
+    (8, 'Crime et Châtiment', 'Fiodor Dostoïevski', 1866),
+    (9, 'Le Maître et Marguerite', 'Mikhaïl Boulgakov', 1967),
+    (10, 'Harry Potter à l''école des sorciers', 'J.K. Rowling', 1997);
+</sql><sql name="SQL 4">CREATE TABLE Usager (
+    id INT PRIMARY KEY,
+    nom TEXT,
+    prenom TEXT
+);
+INSERT INTO Usager (id, nom, prenom)
+VALUES
+    (1, 'Dupont', 'Jean'),
+    (2, 'Martin', 'Sophie'),
+    (3, 'Dubois', 'Pierre'),
+    (4, 'Lefebvre', 'Marie'),
+    (5, 'Moreau', 'Thomas');
+</sql><sql name="SQL 5">-- Création de la table Emprunt
+CREATE TABLE Emprunt (
+    id_emprunteur INT,
+    date_emprunt DATE,
+    date_retour DATE,
+    id_livre INT,
+    PRIMARY KEY (date_emprunt, id_livre),
+    FOREIGN KEY (id_emprunteur) REFERENCES Usager(id),
+    FOREIGN KEY (id_livre) REFERENCES Livre(id)
+);
+</sql><sql name="SQL 6">INSERT INTO Emprunt
+VALUES (3, '2022-11-07', '2022-11-03', 11);</sql><sql name="SQL 7">INSERT INTO Emprunt 
+VALUES (3, '2023-11-07', '2023-11-14', 6),  
+    (3, '2023-12-10', '2023-12-17', 2),  
+    (2, '2023-11-12', '2023-11-19', 8),  
+    (4, '2023-11-15', '2023-11-22', 5),  
+    (4, '2023-09-15', '2023-09-22', 6),  
+    (4, '2023-12-05', '2023-12-12', 3),  
+    (5, '2023-11-10', '2023-11-17', 10), 
+    (5, '2023-11-21', '2023-11-28', 4),  
+    (1, '2023-11-09', '2023-11-15', 6),  
+    (1, '2023-11-19', '2023-11-26', 9),  
+    (4, '2023-11-10', '2023-11-17', 2);  
+</sql><sql name="SQL 8">DELETE FROM Usager
+where prenom = 'Sophie';
+</sql><sql name="SQL 9">select titre
+from Livre
+where annee_publi &gt; 1950;</sql><current_tab id="0"/></tab_sql></sqlb_project>
