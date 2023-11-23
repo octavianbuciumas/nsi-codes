@@ -69,34 +69,63 @@ def compatibles(p, f):
             return False
     return True
 
-p1,p2,p3, p4 = init_piles()
-f1,f2, f3, f4 = init_files()
-p1.affiche()
-f1.affiche()
-print(compatibles(p1, f1))
+# p1,p2,p3, p4 = init_piles()
+# f1,f2, f3, f4 = init_files()
+# p1.affiche()
+# f1.affiche()
+# print(compatibles(p1, f1))
 
 def restaure_pile(p, p_aux):
     """ Pile, Pile -> Nonetype
     Restaure p à son état initial lorsque les dépilements successifs
     on été empilés dans p_aux. """
+    # vide p dans p_aux
     while not p.est_vide():
         c = p.depiler()
         p_aux.empiler(c)
+    # vide p_aux dans p
     while not p_aux.est_vide():
-        # À compléter
-        pass
+        c = p_aux.depiler()
+        p.empiler(c)
 
 def restaure_file(f, f_aux):
     """ File, File -> Nonetype
     Restaure f à son état initial lorsque les défilement successifs
     on été enfilés dans f_aux. """
-    pass
+    # on vide f dans f_aux
+    while not f.est_vide():
+        b = f.defiler()
+        f_aux.enfiler(b)
+    while not f_aux.est_vide():
+        b = f_aux.defiler()
+        f.enfiler(b)
 
-def compatibles(p, f):
+def compatibles2(p, f):
     """ Pile, File -> Bool
     Détermine si les chapeaux sont associés aux bons bonshommes
     L'état de la pile p et la file f sera le même avant et après exécution """
-    pass
+    p_aux = Pile()
+    f_aux = File()
+    while not p.est_vide():
+        b = f.defiler()
+        f_aux.enfiler(b)
+        c = p.depiler()
+        p_aux.empiler(c)
+        if b.content(c) == False:
+            restaure_pile(p, p_aux)
+            restaure_file(f, f_aux)
+            return False
+    restaure_pile(p, p_aux)
+    restaure_file(f, f_aux)
+    return True
+
+p1,p2,p3, p4 = init_piles()
+f1,f2, f3, f4 = init_files()
+p1.affiche()
+f1.affiche()
+print(compatibles2(p1, f1))
+p1.affiche()
+f1.affiche()
 
 def solution():
     """ () -> [(int, int)]
