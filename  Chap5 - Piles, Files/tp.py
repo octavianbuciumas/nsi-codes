@@ -119,13 +119,13 @@ def compatibles2(p, f):
     restaure_file(f, f_aux)
     return True
 
-p1,p2,p3, p4 = init_piles()
-f1,f2, f3, f4 = init_files()
-p1.affiche()
-f1.affiche()
-print(compatibles2(p1, f1))
-p1.affiche()
-f1.affiche()
+# p1,p2,p3, p4 = init_piles()
+# f1,f2, f3, f4 = init_files()
+# p1.affiche()
+# f1.affiche()
+# print(compatibles2(p1, f1))
+# p1.affiche()
+# f1.affiche()
 
 def solution():
     """ () -> [(int, int)]
@@ -133,37 +133,49 @@ def solution():
     piles = init_piles()
     files = init_files()
     sol = []
-    pass
+    for i in range(len(piles)):
+        for j in range(len(files)):
+            if compatibles2(piles[i], files[j]):
+                sol.append((i + 1, j + 1))
+    return sol
 
 def arrivee_rampe(profondeur):
     """ [int] -> [int]
     Détermine l'ordre d'arrivée des boules numérotées de 1 à 10 """
     rampe_lancement = File()
     for b in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
-        ... # à compléter
+        rampe_lancement.enfiler(b)
     piles = [Pile(max_elt = p) for p in profondeur] # liste de piles bornées, dans l'ordre du parcours.
     rampe_finale = File() # billes dans l'ordre d'arrivée
     numero_pile = 0 # indice de la pile à remplir
     
     # on remplit les piles dans l'ordre dans lequel elles sont positionnées
     # sur le parcours tant que cela est possible (c'est à dire tant que
-    # la dernière pile du parcours n'est pas vide)
+    # la dernière pile du parcours n'est pas pleine et qu'il y a
+    # une bille sur la rampe de départ)
     # Si la pile que l'on cherche à remplir est pleine,
     # alors il faut commencer par changer le numéro de la pile à remplir. 
     # On empile une bille prise depuis la rampe de lancement sur la pile à remplir.
-    while ...:
-        ... # à compléter
+    while not piles[-1].est_pleine() and not rampe_lancement.est_vide():
+    # si l est une liste l[-1] désigne le dernier élément de la liste
+        pile_actuelle = piles[numero_pile]
+        if pile_actuelle.est_pleine():
+            numero_pile += 1
+        bille = rampe_lancement.defiler()
+        piles[numero_pile].empiler(bille)
+        
         
     # Toutes les billes restantes roulent directement dans la rampe d'arrivée.
-    while ...:
-        ... # à compléter
-  
+    while not rampe_lancement.est_vide():
+        bille = rampe_lancement.defiler()
+        rampe_finale.enfiler(bille)
     # On retire les ressorts dans l'ordre dans lesquels ils sont positionnés
     # sur le parcours. Les billes ressortent des trous et viennent s'accumuler
     # sur la rampe de lancement.
     for p in piles:
-        while ...:
-            ... # à compléter
+        while not p.est_vide():
+            e = p.depiler()
+            rampe_finale.enfiler(e)
 
     return rampe_finale
 
