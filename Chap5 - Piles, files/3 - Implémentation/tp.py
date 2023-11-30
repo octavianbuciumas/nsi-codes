@@ -12,22 +12,35 @@ class Pile:
     def est_vide(self):
         """ Pile -> bool
         Détermine si la pile est vide """
-        pass
+        return self.sommet is None
     
     def empiler(self, v):
         """ Pile, int -> Nonetype
         Empile la valeur v au sommet de la pile self """
-        pass
+        m = Maillon(v, self.sommet)
+        self.sommet = m
     
     def depiler(self):
         """ Pile -> int
         Renvoie l'élément présent au sommet de la pile self, en le supprimant de la pile """
-        pass
+        if self.est_vide():
+            raise IndexError("Impossible de dépiler : la pile est vide")
+        else:
+            valeur_e = self.sommet
+            self.sommet = self.sommet.suivant
+            return valeur_e.valeur
     
     def __str__(self):
         """ Pile -> str
         Construit la chaîne de caractère représentant la pile self """
-        pass
+        # s='[Sommet]'
+        s = ["[Sommet]"]
+        maillon_courant=self.sommet
+        while maillon_courant != None:
+            # s=s+f' {maillon_courant.valeur}'
+            s.append(f' {maillon_courant.valeur}')
+            maillon_courant=maillon_courant.suivant
+        return "".join(s)
 
 class File:
     """Une file d'entiers"""
@@ -39,12 +52,12 @@ class File:
     def est_vide(self):
         """ File -> bool
         Détermine si la file self est vide """
-        pass
+        return self.debut is None and self.fin is None
     
     def enfiler(self, v):
         """ File, int -> Nonetype
         Ajoute l'élément v à la file self """
-        pass
+        
     
     def defiler(self):
         """ File -> int
