@@ -26,11 +26,23 @@ def int2strbin(x, n):
     
 def expression(x, n):
     """ int, int -> str """
-    pass
+    bin_chaine = int2strbin(x, n)
+    new = ''
+    for elm in bin_chaine:
+        if elm == '0':
+            new += '('
+        else:
+            new += ')'
+    return new
     
 def liste_bien_parenthesee(n):
-    """ n -> [str] """
-    pass
+    """ int -> [str] """
+    l = []
+    for x in range(2**n):
+        expr = expression(x, n)
+        if est_bien_parenthesee(expr):
+            l.append(expr)
+    return l
     
     
     
