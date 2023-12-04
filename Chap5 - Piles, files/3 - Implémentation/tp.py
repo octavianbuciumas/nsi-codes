@@ -57,15 +57,89 @@ class File:
     def enfiler(self, v):
         """ File, int -> Nonetype
         Ajoute l'élément v à la file self """
+        if self.est_vide():
+            m = Maillon(v,None)
+            self.debut = m
+            self.fin = m
+        else:
+            nouveau = Maillon(v,None)
+            maillon_courant = self.debut
+            self.fin.suivant = nouveau
+            self.fin = nouveau
         
-    
     def defiler(self):
         """ File -> int
         Renvoie le premier élément de la file en le supprimant de celle-ci """
-        pass
+        if self.est_vide():
+            raise IndexError("la file est vide")
+        valeur=self.debut.valeur
+        self.debut=self.debut.suivant
+        if self.debut is None:
+            self.fin = None
+        return valeur
     
     def __str__(self):
         """ self -> str
         Construit la chaîne de caractères représentant la file self """
-        pass
+        s = ["[début]"]
+        maillon_courant=self.debut
+        while maillon_courant != None:
+            # s=s+f' {maillon_courant.valeur}'
+            s.append(f' {maillon_courant.valeur}')
+            maillon_courant=maillon_courant.suivant
+        s.append(" [fin]")
+        return "".join(s)
 
+class PileBornee:
+    def __init__(self, maxi):
+        self.pile = Pile()
+        self.capacite = maxi
+        self.taille = 0
+        
+    def est_vide(self):
+        return self.pile.est_vide()
+        # if self.taille == 0:
+        #    return True
+        # return False
+        
+    def est_pleine(self):
+        """ PileBornee -> bool """
+        return self.capacite == self.taille
+    
+    def empiler(self, v):
+        """ PileBornee, int -> bool """
+        if self.est_pleine():
+            raise IndexError('la pile est pleine')
+        else:
+            self.pile.empiler(v)
+            self.taille += 1
+                    
+    
+    def depiler(self):
+        """ PileBornee -> int """
+        if self.est_vide():
+            raise IndexError('On ne peut pas depiler')
+        else:
+            # valeur = self.pile.sommet.valeur
+            self.taille -= 1
+            return self.pile.depiler()
+    
+    def __str__(self):
+        return self.pile.__str__()
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
