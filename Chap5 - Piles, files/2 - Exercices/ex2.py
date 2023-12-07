@@ -35,6 +35,9 @@ def retourne(p):
     print("pP", id(pP))
     while not est_pile_vide(p):
         empiler(pP,depiler(p))
+    # p = pP # ne fonctionne pas
+    # print("p", id(p)) # pas le même id qu'initialement
+    # p est une nouvelle pile
     return pP
 
 def retourne2(p):
