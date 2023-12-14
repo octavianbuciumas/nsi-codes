@@ -17,16 +17,7 @@ class Processus:
     def est_termine(self):
         """ Processus -> bool
         Détermine si le processus p a terminé son exécution """
-        pass
-    
-    def __init__(self, pid, arrivee, duree):
-        """ Initialise un processus """
-        pass
-    
-    def avancer(self, d, t):
-        """ Processus, int, int -> Nonetype
-        Avance le processus """
-        pass
+        pass    
     
     def sejour(self):
         """ Renvoie le temps de séjour de self """
