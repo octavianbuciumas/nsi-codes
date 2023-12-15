@@ -1,13 +1,18 @@
+from ds import *
+
 class Processus:
     """Représente un processus"""
     def __init__(self, pid, arrivee, duree):
         """Processus, int, int, int -> Nonetype"""
-        pass
-
+        self.pid = pid
+        self.arrivee = arrivee
+        self.duree = duree
+        self.duree_restante = duree
+        
     def __repr__(self):
         """ Processus -> str
         Renvoie une chaine de caractère représentant le processus self """
-        pass
+        return f"<P{self.pid}>"
     
     def avancer(self, d, t):
         """ Processus, int, int -> Nonetype
@@ -39,12 +44,12 @@ class Chronogramme:
     """Représente un chronogramme"""
     def __init__(self):
         """Chronogramme -> Nonetype"""
-        pass
+        self.table = []
 
     def temps_ecoule(self):
         """ Chronogramme -> int
         Renvoie le nombre de cycles écoulés depuis l'instant initial """
-        pass
+        return len(self.table)
     
     def enregistrer(self, p, q):
         """ int, int -> Nonetype
@@ -80,5 +85,25 @@ class OrdonnanceurFIFO:
 def renvoie_et_supprime_premier(p_list):
     """ [Processus] -> Processus
     Renvoie et supprime de p_list le processus dont l'attribut arrivee est le plus petit """
-    pass
+    mini = p_list[0].arrivee
+    indice = 0
+    for i in range(len(p_list)):
+        if p_list[i].arrivee < mini :
+            mini = p_list[i].arrivee
+            indice = i
+    # one-liner : (complètement hors programme)
+    # indice, mini = min(enumerate(l), key=lambda t: t[1].arrivee)
+    # explications : l'argument optinnel key est une fonction f
+    # l'instruction 
+    # min([P1, P2, P3], key=f) 
+    # permet de renvoyer 
+    # l'élément e du tableau [e1, e2, e3] tel que f(e) est mininum
+    # enumerate([P1, P2, P3]) renvoie le tableau [(0, P1), (1, P2), (2, P3)]
+    return p_list.pop(indice)
+
+p1 = Processus(1, 0, 10)
+p2 = Processus(2, 3, 4)
+p3 = Processus(3, 2, 8)
+l = [p1,p2,p3]
+        
 
