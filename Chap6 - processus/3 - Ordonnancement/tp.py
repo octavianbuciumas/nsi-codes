@@ -65,12 +65,16 @@ class OrdonnanceurFIFO:
     """Représente un ordonnanceur"""
     def __init__(self, q=1):
         """OrdonnanceurFIFO, int -> Nonetype"""
-        pass
+        self.chrono = Chronogramme()
+        self.file_processus = File()
+        self.quantum = q
 
     def ajoute_processus(self, p_list):
         """ OrdonnanceurFIFO, [Processus] -> Nonetype
         Ajoute à self.file_processus les processus de p_list par ordre d'arrivée """
-        pass
+        while len(p_list) != 0:
+            self.file_processus.enfiler(renvoie_et_supprime_premier(p_list))
+        
     
     def exec_quantum(self):
         """ OrdonnanceurFIFO -> Nonetype
