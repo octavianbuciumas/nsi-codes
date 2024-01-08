@@ -1,3 +1,31 @@
+from ds import Arbre, creer_vide, est_vide, gauche, droit, etiquette
+
+a0 = Arbre(5, None, None)
+a1 = Arbre(-2, None, None)
+a2 = Arbre(1, a0, a1)
+a3 = Arbre(1,
+           Arbre(4,
+                 None,
+                 Arbre(3, None, None)),
+           Arbre(5,
+                 Arbre(2,
+                       Arbre(12, None, None),
+                       Arbre(9, None, None)),
+                 Arbre(1,
+                       Arbre(7, None, None),
+                       None)))
+
+a4 = Arbre(9, Arbre(7, None, None), None)
+a5 = Arbre(8, Arbre(5, None, None), None)
+a6 = Arbre(1, Arbre(2, None, None), Arbre(3, None, None))
+a7 = Arbre(12,
+           a6,
+           Arbre(4,
+                 Arbre(9,
+                       Arbre(7, None, None),
+                       None),
+                 Arbre(8, None, Arbre(5, None, None))))
+
 def est_feuille(a):
     """ Arbre -> bool
     Détermine si a est constitué d'un seul élément """
