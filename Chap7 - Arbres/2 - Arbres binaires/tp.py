@@ -29,12 +29,25 @@ a7 = Arbre(12,
 def est_feuille(a):
     """ Arbre -> bool
     Détermine si a est constitué d'un seul élément """
-    pass
+    # lorsque l'arbre est vide not est_vide(a) s'évalue à False
+    # python n'évalue pas le reste car False and ... vaudra toujours False
+    # Donc les instructions gauche(a) et droit(a) ne sont pas exécutées
+    # lorsque l'arbre a est vide.
+    return not est_vide(a) and est_vide(gauche(a)) and est_vide(droit(a)) 
+    
+    # if gauche(a) == None and droit(a) == None and creer_vide() != a:
+    #    return True
+    # return False
 
 def taille(a):
     """ Arbre -> int
     Renvoie le nombre de nœuds de a """
-    pass
+    if est_vide(a):
+        return 0
+    else:
+        # 2 appels récursifs
+        return 1 + taille(gauche(a)) + taille(droit(a))
+        
 
 def somme(a):
     """ Arbre -> int
