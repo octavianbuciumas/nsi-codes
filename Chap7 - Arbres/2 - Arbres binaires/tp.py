@@ -52,17 +52,84 @@ def taille(a):
 def somme(a):
     """ Arbre -> int
     Renvoie la somme des éléments de l'arbre a """
-    pass
+    # cas de base avec un élément plus compliqué :
+    if est_feuille(a):
+        return etiquette(a)
+    elif est_vide(droit(a)):
+        return somme(gauche(a)) + etiquette(a)
+    elif est_vide(gauche(a)):
+        return somme(droit(a)) + etiquette(a)
+#    if taille(a) == 1:
+#        return etiquette(a)
+#    if est_vide(a):
+#        return 0
+    else:
+        return somme(gauche(a)) + somme(droit(a)) + etiquette(a)
+    
+def produit(a):
+    """ Renvoie le produit des éléments de a """
+    # le produit de zéro éléments vaut 1
+    # (mais pourquoi ???? parce que ça marche !)
+    if est_vide(a):
+        return 1
+    else:
+        return produit(gauche(a))*produit(droit(a))*etiquette(a)
 
 def hauteur(a):
     """ Arbre -> int
     Renvoie la hauteur de l'arbre """
-    pass
+#    if est_vide(a):
+# return 0
+    if est_feuille(a):
+        return 1
+    elif est_vide(droit(a)):
+        return hauteur(gauche(a)) + 1
+    elif est_vide(gauche(a)):
+        return hauteur(droit(a)) + 1
+    else:
+        max_gauche = hauteur(gauche(a))
+        max_droite = hauteur(droit(a))
+        if max_gauche > max_droite :
+            return max_gauche + 1
+        else:
+            return max_droite + 1
+        
 
 def affiche_infixe(a):
     """ Arbre -> Nonetype
     Affiche l'arbre a de manière infixe """
-    pass
+    if est_vide(a):
+        pass
+    else:
+        print("(", end="")
+        affiche_infixe(gauche(a))
+        print(etiquette(a), end="")
+        affiche_infixe(droit(a))
+        print(")", end="")
+
+def affiche_prefixe(a):
+    """ Arbre -> Nonetype
+    Affiche l'arbre a de manière infixe """
+    if est_vide(a):
+        pass
+    else:
+        print("(", end="")
+        print(etiquette(a), end="")
+        affiche_prefixe(gauche(a))
+        affiche_prefixe(droit(a))
+        print(")", end="")
+
+def affiche_postfixe(a):
+    """ Arbre -> Nonetype
+    Affiche l'arbre a de manière infixe """
+    if est_vide(a):
+        pass
+    else:
+        print("(", end="")
+        affiche_postfixe(gauche(a))
+        affiche_postfixe(droit(a))
+        print(etiquette(a), end="")
+        print(")", end="")
 
 def rechercher(a, e):
     """ Arbre, int -> bool
