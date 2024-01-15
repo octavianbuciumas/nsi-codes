@@ -134,12 +134,40 @@ def affiche_postfixe(a):
 def rechercher(a, e):
     """ Arbre, int -> bool
     Renvoie True ssi e est une des étiquettes de a """
-    pass
+    if est_vide(a):
+        return False
+#    ou mieux :
+#    elif etiquette(a) == e:
+#        return True
+    else:
+        avant_gauche = rechercher(gauche(a), e)
+        avant_droit =  rechercher(droit(a), e)
+        # un élément e est une étiquette de l'arbre de racine a
+        # si
+        # soit il appartient au sous-arbre gauche
+        # soit il appartient au ssous-arbre droit
+        # soit c'est l'étiquette de la racine
+        return avant_gauche or avant_droit or etiquette(a) == e
+        
 
 def maximum(a):
     """ Arbre -> int
     Renvoie la plus grande étiquette de a """
-    pass
+    if est_feuille(a):
+        return etiquette(a)
+    elif est_vide(gauche(a)):
+        avant_droit = maximum(droit(a))
+        if avant_droit > etiquette(a):
+            return avant_droit
+        else:
+            return etiquette(a)
+    elif est_vide(droit(a)):
+        # attention à ne pas confondre max et maximum
+        return max(etiquette(a), maximum(gauche(a)))
+        #avant_gauche = maximum(gauche(a))
+        #return avant_gauche if avant_droit > etiquette(a) else etiquette(a)
+    else:
+        return max(etiquette(a), maximum(gauche(a)), maximum(droit(a)))
 
 def est_egal(a1, a2):
     """ Arbre, Arbre -> bool
