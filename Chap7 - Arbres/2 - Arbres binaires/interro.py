@@ -44,14 +44,22 @@ a4 = Arbre(5,
 def est_parfait(a):
     if est_vide(a):
         return True
-    elif est_vide(gauche(a)) and not est_vide(droit(a)):
-        return False
-    elif est_vide(droit(a)) and not est_vide(gauche(a)):
-        return False
+    # elif est_vide(gauche(a)) and not est_vide(droit(a)):
+    #     return False
+    # elif est_vide(droit(a)) and not est_vide(gauche(a)):
+    #     return False
     else:
         est_parfait_sag = est_parfait(gauche(a))
         est_parfait_sad = est_parfait(droit(a))
-        return est_parfait_sag and est_parfait_sad
+        # ^ est l'opérateur xor (ou exclusif) :
+        # True  ^ True  -> False
+        # False ^ True  -> True
+        # True  ^ False -> True
+        # False ^ False -> False
+        if est_vide(gauche(a)) ^ est_vide(droit(a)):
+            return False
+        else:
+            return est_parfait_sag and est_parfait_sad
 
 def est_peigne(a):
     if est_vide(a):
@@ -72,11 +80,3 @@ def nb_feuilles(a):
         return nb_feuilles(gauche(a))
     else:
         return nb_feuilles(gauche(a)) + nb_feuilles(droit(a))
-    
-    
-    
-    
-    
-    
-    
-
