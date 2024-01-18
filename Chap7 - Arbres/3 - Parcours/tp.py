@@ -77,28 +77,65 @@ def liste_joueurs2(a):
         l = liste_joueurs2(gauche(a))
         l.extend(liste_joueurs2(droit(a)))
         return l
+    
 def niveau(a, i):
     """ Arbre, int -> [str]
     Renvoie la liste des étiquettes des nœuds de profondeur i de l'arbre a """
-    pass
+    if i == 0:
+        return [etiquette(a)]
+    else:
+        ag = niveau(gauche(a), i - 1)
+        ad  = niveau(droit(a), i -1)
+        return ag + ad # + concatène les listes
 
 def vaincus_gagnant(a):
     """ Arbre -> [str]
     Renvoie la liste des joueurs ayant joué un match contre le gagnant de la compétition d'arbre a """
-    pass
-
+    if est_vide(a):
+        return []
+    elif est_feuille(a):
+        return []
+    else:
+        ag = vaincus_gagnant(gauche(a))
+        ad = vaincus_gagnant(droit(a))
+        if etiquette(a) == etiquette(gauche(a)):
+            return ag + [etiquette(droit(a))]
+        else:
+            return ad + [etiquette(gauche(a))]
+        
 def parcours_largeur(a):
     """ Arbre -> [str]
     Renvoie la liste des étiquettes des nœuds de l'arbre a, telle qu'obtenue à l'aide d'un parcours en largeur """
-    pass
+    file = [a]
+    liste_vus = []
+    while not file == []:
+        n = file[0]
+        liste_vus.append(etiquette(n))
+        file.pop(0)
+        if not est_vide(gauche(n)):
+            file.append(gauche(n))
+        if not est_vide(droit(n)):
+            file.append(droit(n))
+    return liste_vus
 
 def recherche_noeud(a, nom):
     """ Arbre, str -> Arbre
     Renvoie le sous-arbre de a dont la racine a pour étiquette nom et est de profondeur minimale dans a """
-    pass
+    file = [a]
+    liste_vus = []
+    while not file == []:
+        n = file[0]
+        # opération de traitement :
+        if etiquette(n) == nom:
+            return n 
+        file.pop(0)
+        if not est_vide(gauche(n)):
+            file.append(gauche(n))
+        if not est_vide(droit(n)):
+            file.append(droit(n))
 
 def joueurs_vaincus(a, nom):
     """ Arbre, str -> [str]
     Renvoie la liste des joueurs vaincus par nom dans la compétition d'arbre a """
-    pass
-
+    n = recherche_noeud(a, nom)
+    return vaincus_gagnant(n)
