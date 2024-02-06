@@ -33,7 +33,7 @@ class ArbreBinaire:
     def __str__(self):
         """ ArbreBinaire -> str """
         if self.est_vide():
-            return ""
+            return "×"
         return f"({self.gauche()}) {self.etiquette()} ({self.droit()})"
     
     def to_latex(self):
