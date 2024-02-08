@@ -1,6 +1,6 @@
 # Auteur : Octavian
 
-# Exercice 1
+#-------------Exercice-1------------#
 def recherche(tab,n):
     indice = -1
     for i in range(len(tab)):
@@ -10,7 +10,7 @@ def recherche(tab,n):
         indice = len(tab)
     return indice
         
-# Exercice 2
+#-------------Exercice-2------------#
 from math import sqrt
 
 def distance(point1, point2):
