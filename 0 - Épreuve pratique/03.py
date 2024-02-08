@@ -1,4 +1,4 @@
-# Auteur : Medhi
+# Auteur : Mehdi
 
 #Exercice 1
 def moyenne(liste):
