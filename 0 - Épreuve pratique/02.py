@@ -2,7 +2,7 @@
 
 
 def indices_maxi(tab):
-    """ list -> (int,list)
+    """ [int] -> (int,[int])
     Renvoie la valeur ainsi que les indices de l'élement maximal d'une
     liste"""
     liste_maxi = []
@@ -16,7 +16,7 @@ def indices_maxi(tab):
     return (elem_max,liste_maxi)
 
 def positif(pile):
-    """ list -> list
+    """ [int] -> [int]
     Renvoie la liste des élements positifs d'une liste."""
     pile_1 = list(pile)
     pile_2 = []
