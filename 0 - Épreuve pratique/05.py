@@ -1,4 +1,4 @@
-# Auteur : Samy
+# Auteur : Sami Bouaziz
 
 import random
 
