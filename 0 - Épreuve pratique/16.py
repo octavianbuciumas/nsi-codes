@@ -1,4 +1,4 @@
-# Auteur : Paul M.
+# Auteur : Paul Morand
 
 resultats = {'Dupont': {
     'DS1': [15.5, 4],
