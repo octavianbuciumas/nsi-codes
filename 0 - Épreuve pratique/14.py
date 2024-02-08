@@ -5,7 +5,7 @@ def recherche(elt,tab):
     """
     Écrire une fonction recherche qui prend en paramètres un nombre entier elt et un
     tableau tab de nombres entiers, et qui renvoie l’indice de la première occurrence de
-    elt dans tab si elt est dans tab et -1 sinon."""
+    elt dans tab si elt est dans tab et -1 sinon"""
     for i in range(len(tab)):
         if tab[i] == elt:
             return i
