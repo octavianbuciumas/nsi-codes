@@ -6,4 +6,15 @@ def multiplication(n1,n2):
    return res
 
 #Ex 2
-def chercher(
+def chercher(tab, n, i, j):
+ if i < 0 or j > len(tab):
+ return None
+ elif i > j:
+ return None
+ m = (i + j) // ...
+ if ... < n:
+ return chercher(tab, n, ..., ...)
+ elif ... > n:
+ return chercher(tab, n, ..., ...)
+ else:
+ return ...
