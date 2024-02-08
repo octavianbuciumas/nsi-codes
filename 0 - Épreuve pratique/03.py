@@ -2,6 +2,7 @@
 
 #Exercice 1
 def moyenne(liste):
+    """ [(int, int)] -> float | None """
     somme_valeurs = 0
     somme_coefficients = 0
 
@@ -10,7 +11,7 @@ def moyenne(liste):
         somme_coefficients += coefficient
         
     if somme_coefficients == 0:
-        print("None") # Erreur ?
+        return None
     else:
         return somme_valeurs / somme_coefficients
 
