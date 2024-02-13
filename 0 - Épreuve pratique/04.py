@@ -25,10 +25,10 @@ def voisinage(n, ligne, colonne):
     return voisins
 def incremente_voisins(grille, ligne, colonne):
  """ Incrémente de 1 toutes les cases voisines d'une bombe."""
-    voisins = ...
+    voisins = voisinage(n, ligne, colonne)
     for l, c in voisins:
-        if grille[l][c] != ...: # si ce n'est pas une bombe
-            ... # on ajoute 1 à sa valeur
+        if grille[l][c] != -1                  # si ce n'est pas une bombe
+            grille[l][c] += 1                  # on ajoute 1 à sa valeur
 def genere_grille(bombes):
  """ Renvoie une grille de démineur de taille nxn où n est
  le nombre de bombes, en plaçant les bombes à l'aide de
@@ -39,6 +39,6 @@ def genere_grille(bombes):
     grille = [[0 for colonne in range(n)] for ligne in range(n)]
  # Place les bombes et calcule les valeurs des autres cases
     for ligne, colonne in bombes:
-        grille[ligne][colonne] = ... # place la bombe
-        ... # incrémente ses voisins
+        grille[ligne][colonne] = -1                    # place la bombe
+        incremente_voisin(grille, ligne, colonne)      # incrémente ses voisins
     return grille
