@@ -8,22 +8,28 @@ class Graphe:
     def ajouter_sommet(self):
         """ Graphe -> Nonetype
         Ajoute un sommet au graphe """
-        pass
+        for i in range(self.n):
+            self.adj[i].append(False)     
+        self.adj.append([False]*(self.n + 1))
+        self.n += 1
 
     def ajouter_arc(self, source, destination):
         """ Graphe, int, int -> Nonetype
         Ajoute l'arc source -> destination """
         self.adj[source][destination] = True
 
-    def supprimer_sommet(self, i):
+    def supprimer_sommet(self, k):
         """ Graphe, int -> Nonetype
         Supprime le sommet i du graphe. Les sommets j > i sont renommés en j - 1. """
-        pass
+        for i in range(self.n):
+            self.adj[i].pop(k)
+        self.adj.pop(k)
+        self.n -= 1
 
     def supprimer_arc(self, source, destination):
         """ Graphe, int, int -> Nonetype
         Supprime l'arc source -> destination """
-        pass
+        self.adj[source][destination] = False
 
     def est_voisin(self, source, destination):
         """ Graphe, int, int -> bool
@@ -55,22 +61,36 @@ class Graphe:
     def liste_arcs(self):
         """ Graphe -> [(int, int)]
         Renvoie la liste des arcs du graphe """
-        pass
+        l = []
+        for sommet in self.sommets():
+            for destination in self.voisins(sommet):
+                l.append((sommet, destination))
+        return l
 
     def ordre(self):
         """ Graphe -> int
         Renvoie l'ordre du graphe  """
-        pass
+        return self.n#return len(self.sommets())
 
     def taille(self):
         """ Graphe -> int
         Renvoie la taille du graphe """
-        pass
+        return len(self.liste_arcs())
 
     def decrire(self):
         """ Graphe -> Nonetype
         Affiche une description du graphe self """
-        pass
+        print(f"Graphe d'ordre {self.ordre()}")
+        for sommet in self.sommets():
+            decrire_voisins = " ".join([str(s) for s in self.voisins(sommet)])
+            print(f"Sommet {sommet} -> " + decrire_voisins)
+        
+        # print("Graphe d'ordre", self.ordre(), "et de taille", self.taille())
+        # for sommet in self.sommets():
+        #    print("Sommet", sommet, "-> ", end='')
+        #    for voisin in self.voisins(sommet):
+        #        print(voisin, " ", end = '')
+        #    print()
 
 g1 = Graphe(4)
 g1.ajouter_arc(0, 1)
