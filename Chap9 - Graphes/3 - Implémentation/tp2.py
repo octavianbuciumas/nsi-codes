@@ -14,3 +14,26 @@ class Graphe:
         """ Graphe, str, str -> Nonetype
         Ajoute l'arc source -> destination au graphe self """
         self.adj[source].append(destination)
+    
+    def ajouter_liste_arcs(self, arcs):
+        """ Graphe, [(str, str)] -> Nonetype """
+        for a in arcs:
+            source, destination = a
+            self.ajouter_sommet(source)
+            self.ajouter_sommet(destination)
+            self.ajouter_arc(source, destination)
+    
+    
+
+g2 = Graphe()
+g2.ajouter_liste_arcs([('A', 'B'),
+                       ('A', 'C'),
+                       ('A', 'D'),
+                       ('B', 'D'),
+                       ('C', 'A'),
+                       ('C', 'D'),
+                       ('D', 'E'),
+                       ('E', 'F'),
+                       ('F', 'E'),
+                       ('F', 'F')])
+print(g2.adj)
