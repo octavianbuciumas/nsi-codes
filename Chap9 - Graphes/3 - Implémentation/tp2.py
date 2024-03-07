@@ -23,7 +23,25 @@ class Graphe:
             self.ajouter_sommet(destination)
             self.ajouter_arc(source, destination)
     
+    def voisins(self, sommet):
+        """ Graphe, str -> [str]
+        Renvoie la liste des voisins de sommet """
+        return self.adj[sommet]
     
+    def est_voisin(self, source, destination):
+        """ Graphe, str, str -> bool
+        Renvoie True ssi l'arc source -> destination existe """
+        for v in self.adj[source]:
+            if v == destination:
+                return True
+        return False
+    
+    def sommets(self):
+        """ Graphe -> [str]
+        Renvoie la liste des sommets du graphe self """
+        return [s for s in self.adj]
+        # return list(self.adj.keys())
+        
 
 g2 = Graphe()
 g2.ajouter_liste_arcs([('A', 'B'),
