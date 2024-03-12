@@ -1,43 +1,65 @@
+from ds import *
+
 def tab_est_trie(tab):
     """ [int] -> bool
     Détermine si le tableau tab est trié par ordre croissant. """
-    pass
+    for i in range(len(tab) - 1):
+        if tab[i] > tab[i+1]:
+            return False
+    return True
 
 def liste_est_triee(l):
     """ Liste -> bool
     Détermine si la liste l est triée """
-    pass
+    if est_vide(l) or est_singleton(l):
+        return True
+    else:
+        reste = liste_est_triee(queue(l))
+        x1, x2 = tete(l), tete(queue(l))
+        return x1 <= x2 and reste 
+        
 
 def tri_insertion_iter(tab):
     """ [int] -> [int]
     Trie en place le tableau tab (tri par insertion) """
     n = len(tab)
-    for i in range(...):
+    for i in range(n):
         # les éléments d'indice 0..i du tableau t
         # sont triés dans l'ordre croissant
         element = tab[i]
         trou = i
         # on cherche à insérer l'élément dans le tableau
         # constitué des éléments d'indice 0..i
-        while ... > ... and trou > 0:
-            tab[trou] = ...         # on décale l'élément précédent de tab
-            trou = ...              # mise à jour de l'indice du trou
+        while tab[trou - 1] > element and trou > 0:
+            tab[trou] = tab[trou-1]         # on décale l'élément précédent de tab
+            trou = trou - 1              # mise à jour de l'indice du trou
         # À la fin de la boucle soit
         # trou = 0 et tous les éléments de t sont supérieurs à élément
         # soit trou > 0, t[trou - 1] < element < t[i] pour tout i >= trou
-        tab[trou] = ...
+        tab[trou] = element
         # le tableau est alors trié
     return tab # que se passe-t-il si on ne le met pas ?
 
 def insere_trie(l, e):
     """ Liste, int -> Liste
     l est triée par ordre croissant """
-    pass
+    if est_vide(l):
+        return ajoute(l, e)
+    else:
+        if e < tete(l):
+            return ajoute(l, e)
+        else:
+            a = insere_trie(queue(l),e)
+            return ajoute(a, tete(l))
 
 def trie_insertion_rec(l):
     """ Liste -> Liste
     Trie la liste l à l'aide de l'algorithme du tri par insertion """
-    pass
+    if est_vide(l):
+        return l
+    else:
+        reste = trie_insertion_rec(queue(l))
+        return insere_trie(reste, tete(l))
 
 def mini_a_partir(tab, i):
     """ [int], int -> int
