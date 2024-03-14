@@ -5,7 +5,13 @@ def arcs_vers_graphe_no(aretes):
     """ [(Sommet, Sommet)] -> Graphe
     Sommet peut être de type int ou str
     Construit le graphe non orienté dont on donne la liste des arêtes. """
-    pass
+    g = Graphe()
+    for source, destination in aretes:
+        g.ajouter_sommet(source)
+        g.ajouter_sommet(destination)
+        g.ajouter_arc(source, destination)
+        g.ajouter_arc(destination, source)
+    return g
 
 aretes = [(0, 1), (0, 3),
             (0, 6), (1, 4), (1, 6),
@@ -40,7 +46,10 @@ def parcours_aleatoire(G, depart, nombre_sauts):
     """ Graphe, Sommet, int -> {Sommet: int}
     Parcourt aléatoirement le graphe G depuis le sommet depart
     en effectuant nombre_sauts choix de sommets. """
-    pass
+    compte = {s:0 for s in G.sommets()}
+    sommet_courant = depart
+    for i in range(nombre_saut):
+        pass
 
 def parcours_largeur(G, depart):
     """ Graphe, Sommet -> [Sommet]
@@ -49,7 +58,7 @@ def parcours_largeur(G, depart):
     vus = []
     à_explorer = ...
     ...
-    while ...
+    while ...:
         sommet = ...
         if sommet in vus:
             continue
@@ -100,22 +109,22 @@ class MonTableau:
         """ MonTableau, [int] -> Nonetype """
         self.contenu = tab
 
-   class Ensemble:
-       def __init__(self):
-           """ Ensemble -> Nonetype """
-           self.contenu = dict()
+class Ensemble:
+    def __init__(self):
+        """ Ensemble -> Nonetype """
+        self.contenu = dict()
 
-       def ajouter(self, elt):
-           """ Ensemble, elt -> Nonetype """
-           pass
+    def ajouter(self, elt):
+        """ Ensemble, elt -> Nonetype """
+        pass
 
-       def supprimer(self, elt):
-           """ Ensemble, elt -> Nonetype """
-           pass
+    def supprimer(self, elt):
+        """ Ensemble, elt -> Nonetype """
+        pass
 
-       def __contains__(self, elt):
-           """ Ensemble, elt -> bool """
-           pass
+    def __contains__(self, elt):
+        """ Ensemble, elt -> bool """
+        pass
 
 def parcours_profondeur_mieux(G, depart):
     """ Graphe, Sommet -> [Sommet]
