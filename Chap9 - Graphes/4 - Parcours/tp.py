@@ -48,8 +48,31 @@ def parcours_aleatoire(G, depart, nombre_sauts):
     en effectuant nombre_sauts choix de sommets. """
     compte = {s:0 for s in G.sommets()}
     sommet_courant = depart
-    for i in range(nombre_saut):
-        pass
+    compte[sommet_courant] += 1
+    for i in range(nombre_sauts):
+        tab = G.voisins(sommet_courant)
+        choix = randint(0, len(tab)-1)
+        sommet_courant = tab[choix]
+        compte[sommet_courant] += 1
+    return compte
+        
+def frequences(histo):
+    """ {Sommet: int} -> {Sommet: float}
+    Renvoie le dictionnaire des fréquences (arrondies au centième)
+    associé au dictionnaire du nombre d'occurrences des histo du graphe """
+    total = 0
+    for k in histo:
+        # k prend comme valeur les clés
+        total = total + histo[k]
+    # sum([v for v in histo.values()])
+    reponse = dict()
+    for k in histo:
+        reponse[k] = round(histo[k]/total,2)
+    return reponse
+
+histo = parcours_aleatoire(g1, 0, 10000)
+rep = frequences(histo)
+print(rep)
 
 def parcours_largeur(G, depart):
     """ Graphe, Sommet -> [Sommet]
