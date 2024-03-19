@@ -91,15 +91,82 @@ def tri_selection_rec(l):
 def diviser(l):
     """ Liste -> Liste, Liste
     Divise la liste en deux listes """
-    pass
+    if est_vide(l):
+        return creer_vide(), creer_vide()
+    elif est_singleton(l):
+        return l, creer_vide()
+    else:
+        l1, l2 = diviser(queue(queue(l)))
+        l1 = ajoute(l1, tete(l))
+        l2 = ajoute(l2, tete(queue(l)))
+        return l1, l2
 
 def fusionner(l1, l2):
-    """ Liste, Liste
+    """ Liste, Liste -> Liste
     Renvoie la liste des éléments de l1 et l2 triés """
-    pass
+    if est_vide(l1) and est_vide(l2):
+        return creer_vide()
+    elif est_vide(l1):
+        return l2
+    elif est_vide(l2):
+        return l1
+    else:
+        x1, x2 = tete(l1), tete(l2)
+        reste = fusionner(queue(l1), queue(l2))
+        if x2 > x1:
+            reste = ajoute(reste, x2)
+            reste = ajoute(reste, x1)
+        else:
+            reste = ajoute(reste, x1)
+            reste = ajoute(reste, x2)
+        return reste
+            
+    
+def fusionner_2(l1, l2):
+    """ Liste, Liste -> Liste
+    l1 et l2 sont triées
+    Renvoie la liste des éléments de l1 et l2 triés """
+    liste_triee = creer_vide()
+    while not est_vide(l1) and not est_vide(l2):
+        if tete(l1) > tete(l2):
+            liste_triee = ajoute(liste_triee,tete(l2))
+            l2 = queue(l2)
+        else:
+            liste_triee = ajoute(liste_triee,tete(l1))
+            l1 = queue(l1)
+    while not est_vide(l1):
+            liste_triee = ajoute(liste_triee,tete(l1))
+            l1 = queue(l1)
+    while not est_vide(l2):
+            liste_triee = ajoute(liste_triee,tete(l2))
+            l2 = queue(l2)
+    rep = creer_vide()
+    while not est_vide(liste_triee):
+        rep = ajoute(rep, tete(liste_triee))
+        liste_triee = queue(liste_triee)
+    return rep
+    
 
 def tri_fusion(l):
     """ Liste -> Liste
     Trie la liste l (tri fusion) """
-    pass
+    if est_vide(l):
+        return creer_vide()
+    else:
+        l1, l2 = diviser(l)
+        l1 = tri_fusion(l1)
+        l2 = tri_fusion(l2)
+        return fusionner(l1, l2)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
