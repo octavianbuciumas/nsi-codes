@@ -74,24 +74,6 @@ histo = parcours_aleatoire(g1, 0, 10000)
 rep = frequences(histo)
 print(rep)
 
-def parcours_largeur(G, depart):
-    """ Graphe, Sommet -> [Sommet]
-    Parcours le graphe G depuis le sommet depart en largeur
-    (sachant que la liste des sommets présents dans vus ont déjà été visités). """
-    vus = []
-    à_explorer = ...
-    ...
-    while ...:
-        sommet = ...
-        if sommet in vus:
-            continue
-        # opération de traitement
-        vus.append(sommet)
-        # ajout des voisins non visités
-        for destination in G.voisins(sommet):
-            if ...:
-                ...
-    return vus
 
 def frequences(histo):
     """ {Sommet: int} -> {Sommet: float}
@@ -116,16 +98,38 @@ def parcours_profondeur_pile(G, depart):
     Parcours le graphe G depuis le sommet depart en profondeur
     (sachant que la liste des sommets présents dans vus ont déjà été visités). """
     vus = []
-    à_explorer = ...
-    ...
-    while not ...:
-        sommet = ...
+    à_explorer = Pile()
+    à_explorer.empiler(depart)
+    while not à_explorer.est_vide():
+        sommet = à_explorer.depiler()
+        if sommet in vus:
+            continue
         vus.append(sommet)
         # ajout des voisins non visités
         for destination in reversed(G.voisins(sommet)):
+            if not destination in vus:
+                à_explorer.empiler(destination)
+    return vus, à_explorer
+
+def parcours_largeur(G, depart):
+    """ Graphe, Sommet -> [Sommet]
+    Parcours le graphe G depuis le sommet depart en largeur
+    (sachant que la liste des sommets présents dans vus ont déjà été visités). """
+    vus = []
+    à_explorer = ...
+    ...
+    while ...:
+        sommet = ...
+        if sommet in vus:
+            continue
+        # opération de traitement
+        vus.append(sommet)
+        # ajout des voisins non visités
+        for destination in G.voisins(sommet):
             if ...:
                 ...
     return vus
+
 
 class MonTableau:
     def __init__(self, tab):
