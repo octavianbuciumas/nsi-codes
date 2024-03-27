@@ -111,14 +111,40 @@ def fusionner(l1, l2):
     elif est_vide(l2):
         return l1
     else:
+        # ALGORITHME INCORRECT :
+        # fusionner((1, 3), (5, 6)) renvoie
+        # (1, 5, 3, 6)
+        # qui n'est pas triée par ordre croissant
+        # En effet, si on met 1 et 5 "à part" et que
+        # l'on fusionne récursivement les queues,
+        # on obtient la liste (3, 6). Or 5 est plus
+        # grand que 3 ! Ça ne marche donc pas dans ce cas.
+#        x1, x2 = tete(l1), tete(l2)
+#        reste = fusionner(queue(l1), queue(l2))
+#        if x2 > x1:
+#            reste = ajoute(reste, x2)
+#            reste = ajoute(reste, x1)
+#        else:
+#            reste = ajoute(reste, x1)
+#            reste = ajoute(reste, x2)
+        # ALGORITHME CORRECT :
+        # x1 et x2 sont les deux premiers éléments
+        # des listes l1 et l2, triées par ordre croissant
         x1, x2 = tete(l1), tete(l2)
-        reste = fusionner(queue(l1), queue(l2))
-        if x2 > x1:
-            reste = ajoute(reste, x2)
+        # si x1 < x2, alors on est certain qu'il
+        # sera le premier élément de la liste fusionnée.
+        # On fusionne donc queue(l1) avec l2
+        # (c'est possible, car il y a au total un élément
+        # de moins dans ces deux listes, l'élément x1)
+        # Puis, il suffit d'ajouter x1 en début de liste.
+        if x1 < x2:
+            reste = fusionner(queue(l1), l2)
             reste = ajoute(reste, x1)
+        # idem "dans l'autre sens"
+        # si x2 est le plus petit élément.
         else:
-            reste = ajoute(reste, x1)
-            reste = ajoute(reste, x2)
+            reste = fusionner(l1, queue(l2))
+            reste = ajoute(reste, x2)            
         return reste
             
     
@@ -150,8 +176,8 @@ def fusionner_2(l1, l2):
 def tri_fusion(l):
     """ Liste -> Liste
     Trie la liste l (tri fusion) """
-    if est_vide(l):
-        return creer_vide()
+    if est_vide(l) or est_singleton(l):
+        return l
     else:
         l1, l2 = diviser(l)
         l1 = tri_fusion(l1)
