@@ -131,9 +131,9 @@ def fusionner(l1, l2):
         # x1 et x2 sont les deux premiers éléments
         # des listes l1 et l2, triées par ordre croissant
         x1, x2 = tete(l1), tete(l2)
-        # si x1 < x2, alors on est certain qu'il
+        # si x1 < x2, alors on est certain que x1
         # sera le premier élément de la liste fusionnée.
-        # On fusionne donc queue(l1) avec l2
+        # On fusionne donc récursivement queue(l1) avec l2
         # (c'est possible, car il y a au total un élément
         # de moins dans ces deux listes, l'élément x1)
         # Puis, il suffit d'ajouter x1 en début de liste.
