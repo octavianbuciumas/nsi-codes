@@ -77,13 +77,13 @@ le montant avec les pièces de systeme """
 def rendu_monnaie_dyn(systeme, montant):
     """ [int], int -> int
     Renvoie le nombre minimum de pièces de systeme à utiliser pour rendre montant """
-   # dans le pire des cas on rend i avec i pièces de 1
-   T = [... for i in range(montant + 1)] 
-   for i in range(montant + 1):
-       for p in systeme:
-           if i + p <= montant and ...:
-               ...
-   return ...
+    # dans le pire des cas on rend i avec i pièces de 1
+    T = [... for i in range(montant + 1)] 
+    for i in range(montant + 1):
+        for p in systeme:
+            if i + p <= montant and ...:
+                ...
+    return ...
 
 def rendu_monnaie(systeme, montant):
     """ [int], int -> [int]
