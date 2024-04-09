@@ -1,3 +1,10 @@
+def fibo(n):
+    """ int -> int """
+    if n <= 1:
+        return n
+    else:
+        return fibo(n - 2) + fibo(n - 1)
+
 def fibomem(n, memo):
     """ int, {int:int} -> int
     Calcule le terme d'indice n de la suite de Fibonacci
